@@ -1,0 +1,7 @@
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(255) NOT NULL,
+    service_type VARCHAR(255) NOT NULL,
+    booking_time DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
