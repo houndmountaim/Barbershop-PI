@@ -1,28 +1,32 @@
 CREATE DATABASE barbershop;
 USE barbershop;
 
+-- Tabel Kapster (Barber)
 CREATE TABLE barber (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    description TEXT,
     phone VARCHAR(20),
+    email VARCHAR(100),
+    picture VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE services (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT,
     price DECIMAL(10,2) NOT NULL,
     duration_minutes INT,
-    description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT,
     price DECIMAL(10,2) NOT NULL,
     stock INT NOT NULL,
-    description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
