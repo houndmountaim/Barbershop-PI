@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Products - K-One</title>
+    <link rel="stylesheet" href="../frontend/assets/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <section id="products" class="products-section">
+      <div class="container">
+        <h2>Our Products</h2>
+        <p class="subtitle">Evoke the experience of one of our barber shops</p>
+        <div class="product-grid">
+          <div class="product-item">
+            <img
+              src="https://images.unsplash.com/photo-1664530964797-5fa149c8c822?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTl8fGZhY2lhbCUyMHdhc2glMjBtZW5zJTIwc2tpbmNhcmUlMjBwcm9kdWN0fGVufDB8fDB8fHww "
+              alt="Product 1"
+            />
+            <p>New Facial Wash</p>
+            <span>Rp 50.000</span>
+          </div>
+          <div class="product-item">
+            <img
+              src="https://images.unsplash.com/photo-1593596263531-787b08047621?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9tYWRlJTIwbWVuc3xlbnwwfHwwfHx8MA%3D%3D "
+              alt="Product 2"
+            />
+            <p>New Pomade</p>
+            <span>Rp 60.000</span>
+          </div>
+          <div class="product-item">
+            <img
+              src="https://images.unsplash.com/photo-1652349895553-d29523ab524d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8yMjc1fHxoYWlyJTIwdG9uaWMlMjBwcm9kdWN0fGVufDB8fHx8fHww "
+              alt="Product 3"
+            />
+            <p>New Hair Tonic</p>
+            <span>Rp 40.000</span>
+          </div>
+          <div class="product-item">
+            <img
+              src="https://images.unsplash.com/photo-1593560368921-9b9fd9e5841f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8xMTh8fHByb2R1Y3QlMjBoYWlyJTIwU0hBTVBPT3xlbnwwfHx8fHx8MA%3D%3D "
+              alt="Product 4"
+            />
+            <p>New Fresh Shampoo</p>
+            <span>Rp 70.000</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      fetch("/frontend/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

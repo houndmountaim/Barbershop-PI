@@ -81,7 +81,7 @@ body {
   width: 100%;
 }
 
-.about {
+.aboutus {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,31 +91,31 @@ body {
   flex-wrap: wrap;
 }
 
-.about-left {
+.aboutus-left {
   flex: 1;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.about-left .main-img {
+.aboutus-left .main-img {
   max-width: 100%;
   width: 400px;
   border-radius: 10px;
 }
 
-.about-right {
+.aboutus-right {
   flex: 1;
   padding-left: 40px;
 }
 
-.about-subtitle {
+.aboutus-subtitle {
   color: #b68934;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.about-title {
+.aboutus-title {
   font-size: 2.5rem;
   font-weight: bold;
   line-height: 1.3;
@@ -123,26 +123,95 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.about-desc {
+.aboutus-desc {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
-.about-quote {
+.aboutus-quote {
   font-style: italic;
   border-left: 3px solid #b68934;
   padding-left: 15px;
   margin-bottom: 30px;
 }
 
-.btn-about {
+.btn-aboutus {
   display: inline-block;
   background-color: #b68934;
   color: white;
   padding: 12px 24px;
   text-decoration: none;
   font-weight: 500;
+}
+
+.teams-section {
+  padding: 60px 0;
+  background-color: #000000;
+}
+
+.teams-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.teams-container h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.teams-container p {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 280px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.arrow-button {
+  font-size: 20px;
+  color: #aaa;
+  margin-left: auto;
 }
 
 .services {
@@ -336,10 +405,12 @@ body {
   padding: 60px 20px;
   text-align: center;
 }
+
 .products-section .subtitle {
   font-size: 1rem;
   color: #888;
 }
+
 .product-grid {
   display: flex;
   justify-content: center;
@@ -347,16 +418,20 @@ body {
   flex-wrap: wrap;
   margin-top: 30px;
 }
+
 .product-item {
   text-align: center;
 }
+
 .product-item img {
   max-width: 100px;
 }
+
 .product-item p {
   margin-top: 10px;
   font-weight: 600;
 }
+
 .product-item span {
   color: #a0823c;
 }
@@ -380,17 +455,6 @@ body {
   width: 300px;
   height: auto;
   border-radius: 10px;
-}
-.play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  background: white;
-  border-radius: 50%;
-  padding: 10px 15px;
-  color: #a0823c;
 }
 .hours-info {
   max-width: 400px;

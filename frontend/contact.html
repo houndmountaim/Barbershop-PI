@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - K-One</title>
+    <link rel="stylesheet" href="../frontend/assets/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <section id="contact" class="hours-section">
+      <div class="container hours-container">
+        <div class="hours-img">
+          <img
+            src="https://cdn.prod.website-files.com/5cb569e54ca2fddd5451cbb2/62e0ba44b4bd5e786497a37a_Fringe-Hairtsyles.jpg "
+            alt="Working Hours"
+          />
+        </div>
+        <div class="hours-info">
+          <h3>Working Hours</h3>
+          <ul>
+            <li>Monday to Saturday</li>
+            <li>9 A.M - 8 P.M</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      fetch("/frontend/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

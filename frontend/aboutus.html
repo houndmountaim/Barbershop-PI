@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - K-One</title>
+    <link rel="stylesheet" href="../frontend/assets/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <section class="aboutus" id="aboutus">
+      <div class="aboutus-left">
+        <img
+          src="https://i.pinimg.com/736x/f1/3a/c2/f13ac29522ae45d1f1f0ab941f511e34.jpg "
+          alt="Barber Men"
+          class="main-img"
+        />
+      </div>
+
+      <div class="aboutus-right">
+        <p class="aboutus-subtitle">About Us</p>
+        <h2 class="aboutus-title">Best Haircut Salons<br />For Men</h2>
+        <p class="aboutus-desc">
+          "Haircut" is a term used to describe when a person removes the hair on
+          their head. This is done to allow for better access to the part of the
+          body that needs cutting.
+        </p>
+        <blockquote class="aboutus-quote">
+          K-One merupakan salon yang menyediakan berbagai macam jenis potongan
+          rambut untuk pria. Kami memiliki tim yang berpengalaman dan
+          profesional dalam menangani permasalahan rambut secara profesional.
+        </blockquote>
+        <a href="#" class="btn-aboutus">Read More &raquo;</a>
+      </div>
+    </section>
+
+    <script>
+      fetch("/frontend/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

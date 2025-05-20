@@ -1,13 +1,21 @@
 <?php
-$host = 'localhost';
-$db = 'database_name'; // Ganti dengan nama database Anda
-$user = 'username';     // Ganti dengan pengguna database Anda
-$pass = 'password';     // Ganti dengan password pengguna database Anda
+
+$host = 'localhost';        
+$user = 'root';         
+$password = '';         
+$dbname = 'barbershop'; 
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    $conn = new mysqli($host, $user, $password, $dbname);
+
+    if ($conn->connect_error) {
+        throw new Exception("Koneksi gagal: " . $conn->connect_error);
+    }
+} catch (Exception $e) {
+    die(json_encode(['error' => $e->getMessage()]));
 }
+
+$conn->set_charset("utf8mb4");
+
+return $conn;
 ?>
