@@ -36,12 +36,12 @@
     <!-- Script to Load External HTML Files -->
     <script>
       const sections = {
-        "section-home": "home.html",
-        "section-aboutus": "aboutus.html",
-        "section-teams": "teams.html",
-        "section-services": "services.html",
-        "section-products": "products.html",
-        "section-contact": "contact.html",
+        "section-home": "/frontend/pages/home.html",
+        "section-aboutus": "/frontend/pages/aboutus.html",
+        "section-teams": "/frontend/pages/teams.html",
+        "section-services": "/frontend/pages/services.html",
+        "section-products": "/frontend/pages/products.html",
+        "section-contact": "/frontend/pages/contact.html",
       };
 
       Object.entries(sections).forEach(([id, url]) => {
@@ -54,7 +54,7 @@
       });
 
       // Load Navbar
-      fetch("navbar.html")
+      fetch("/frontend/pages/navbar.html")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;
