@@ -1,0 +1,123 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* rata tengah horizontal */
+  align-items: center; /* rata tengah vertikal */
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* membuat keduanya rata kiri dan rata kanan */
+  align-items: stretch; /* agar kedua kolom sama tinggi */
+}
+
+.left-section {
+  flex: 1;
+  padding: 20px;
+  text-align: left; /* teks rata kiri */
+}
+
+.barber-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.right-section {
+  flex: 2;
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.col {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.col.full {
+  flex: 1 1 100%;
+  padding-right: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  height: 40px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.send-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.send-button:hover {
+  background-color: #333;
+}
+
+.contact-wrapper {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  /* Atur layout untuk mobile */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Atur layout untuk tablet */
+}
+
+@media (min-width: 1024px) {
+  /* Default layout untuk desktop */
+}

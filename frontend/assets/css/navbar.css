@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 75px;
+  background-color: rgba(0, 0, 0, 0.7);
+  flex-direction: column;
+}
+
+.navbar-left img {
+  width: 100px;
+  height: 80px;
+  background: transparent;
+}
+
+.navbar-center a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  display: none;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+  /* Atur layout untuk mobile */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Atur layout untuk tablet */
+}
+
+@media (min-width: 1024px) {
+  /* Default layout untuk desktop */
+}
