@@ -10,7 +10,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 75px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #000;
 }
 
 .navbar-left img {

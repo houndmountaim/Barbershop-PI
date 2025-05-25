@@ -206,7 +206,7 @@ body {
 .card-content h3 {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #000;
   margin: 0;
 }
 
@@ -508,7 +508,7 @@ body {
 }
 
 .btn-send:hover {
-  background-color: #333;
+  background-color: #000;
 }
 
 .hours-section {
@@ -587,7 +587,7 @@ body {
 }
 
 .footer {
-  background-color: #222;
+  background-color: #000;
   color: #fff;
   padding: 20px 0;
   text-align: center;

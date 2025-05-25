@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Reset dasar */
 * {
   margin: 0;
   padding: 0;
@@ -6,118 +6,156 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center; /* rata tengah horizontal */
-  align-items: center; /* rata tengah vertikal */
+  font-family: "Poppins", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
+/* Container utama */
 .container {
-  display: flex;
   width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section jam kerja & form kontak */
+.hours-section {
+  padding: 60px 20px;
   background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  justify-content: space-between; /* membuat keduanya rata kiri dan rata kanan */
-  align-items: stretch; /* agar kedua kolom sama tinggi */
-}
-
-.left-section {
-  flex: 1;
-  padding: 20px;
-  text-align: left; /* teks rata kiri */
-}
-
-.barber-image {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.right-section {
-  flex: 2;
-  padding: 20px;
-  background-color: #fafafa;
-}
-
-.row {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-.col {
-  flex: 1;
-  padding-right: 10px;
-}
-
-.col.full {
-  flex: 1 1 100%;
-  padding-right: 0;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
-  height: 40px;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.send-button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.send-button:hover {
-  background-color: #333;
 }
 
 .contact-wrapper {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Info Jam Kerja */
+.hours-info {
+  flex: 1;
+  min-width: 280px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.hours-info:hover {
+  transform: translateY(-5px);
+}
+
+.hours-img {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hours-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.hours-info h3 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.hours-info ul {
+  list-style: none;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Form Kontak */
+.contact-form {
+  flex: 2;
+  min-width: 300px;
+  background-color: #fafafa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form form {
+  display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 .form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1 1 100%;
+  display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 767px) {
-  /* Atur layout untuk mobile */
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Atur layout untuk tablet */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.3s ease;
 }
 
-@media (min-width: 1024px) {
-  /* Default layout untuk desktop */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-send {
+  width: 100%;
+  align-self: flex-start;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-send:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
 }

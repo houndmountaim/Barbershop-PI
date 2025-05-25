@@ -4,22 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - K-One</title>
-    <link rel="stylesheet" href="../frontend/assets/css/.css" />
+
+    <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="../frontend/assets/css/contact.css" />
   </head>
   <body>
+    <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
+    <!-- Contact Section -->
     <section id="contact" class="hours-section">
       <div class="container contact-container">
         <div class="contact-wrapper">
+          <!-- Working Hours Info -->
           <div class="hours-info">
             <div class="hours-img">
               <img
-                src="https://cdn.prod.website-files.com/5cb569e54ca2fddd5451cbb2/62e0ba44b4bd5e786497a37a_Fringe-Hairtsyles.jpg"
+                src="https://cdn.prod.website-files.com/5cb569e54ca2fddd5451cbb2/62e0ba44b4bd5e786497a37a_Fringe-Hairtsyles.jpg "
                 alt="Working Hours"
               />
             </div>
@@ -30,6 +37,7 @@
             </ul>
           </div>
 
+          <!-- Contact Form -->
           <div class="contact-form">
             <form action="#" method="POST">
               <div class="form-row">
@@ -86,6 +94,7 @@
       </div>
     </section>
 
+    <!-- Fetch Navbar -->
     <script>
       fetch("/frontend/navbar.html")
         .then((res) => res.text())
