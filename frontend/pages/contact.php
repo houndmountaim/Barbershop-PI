@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us - K-One</title>
+    <title>Contact Us - Nine'O</title>
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
 
@@ -26,7 +26,7 @@
           <div class="hours-info">
             <div class="hours-img">
               <img
-                src="https://cdn.prod.website-files.com/5cb569e54ca2fddd5451cbb2/62e0ba44b4bd5e786497a37a_Fringe-Hairtsyles.jpg "
+                src="https://cdn.prod.website-files.com/5cb569e54ca2fddd5451cbb2/62e0ba44b4bd5e786497a37a_Fringe-Hairtsyles.jpg"
                 alt="Working Hours"
               />
             </div>
@@ -96,7 +96,7 @@
 
     <!-- Fetch Navbar -->
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/frontend/navbar.php")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;

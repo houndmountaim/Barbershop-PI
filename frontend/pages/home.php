@@ -6,7 +6,7 @@
     <title>Barber Home</title>
     <link rel="stylesheet" href="../frontend/assets/css/home.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -24,7 +24,7 @@
     </section>
 
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/frontend/navbar.php")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;

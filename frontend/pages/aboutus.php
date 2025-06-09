@@ -39,7 +39,7 @@
     </section>
 
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/frontend/navbar.php")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;

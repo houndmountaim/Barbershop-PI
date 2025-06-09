@@ -10,7 +10,7 @@
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -36,13 +36,14 @@
     <!-- Script to Load External HTML Files -->
     <script>
       const sections = {
-        "section-home": "/frontend/pages/home.html",
-        "section-aboutus": "/frontend/pages/aboutus.html",
-        "section-teams": "/frontend/pages/teams.html",
-        "section-services": "/frontend/pages/services.html",
-        "section-products": "/frontend/pages/products.html",
-        "section-contact": "/frontend/pages/contact.html",
-      };
+  "section-home": "pages/home.php",
+  "section-aboutus": "pages/aboutus.php",
+  "section-teams": "pages/teams.php",
+  "section-services": "pages/services.php",
+  "section-products": "pages/products.php",
+  "section-contact": "pages/contact.php",
+};
+
 
       Object.entries(sections).forEach(([id, url]) => {
         fetch(url)
@@ -54,12 +55,12 @@
       });
 
       // Load Navbar
-      fetch("/frontend/pages/navbar.html")
-        .then((res) => res.text())
+      fetch("pages/navbar.php")
+      .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;
         })
-        .catch((err) => console.error("Gagal memuat navbar.html: ", err));
+        .catch((err) => console.error("Gagal memuat navbar.php: ", err));
     </script>
   </body>
 </html>
