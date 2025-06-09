@@ -1,140 +1,187 @@
 <?php
-// barber_service.php
+// api/barber_service.php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-header("Content-Type: application/json");
-require_once __DIR__ . "/db.php";
+include_once '../config/database.php';
+
+class BarberService {
+    private $conn;
+    private $table_name = "barber_service";
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    // ASSIGN SERVICE TO BARBER
+    public function assign_service($barber_id, $service_id) {
+        // Check if relation already exists
+        $check_query = "SELECT * FROM " . $this->table_name . " 
+                        WHERE barber_id = :barber_id AND service_id = :service_id";
+        $check_stmt = $this->conn->prepare($check_query);
+        $check_stmt->bindParam(":barber_id", $barber_id);
+        $check_stmt->bindParam(":service_id", $service_id);
+        $check_stmt->execute();
+        
+        if($check_stmt->rowCount() > 0) {
+            return [
+                'status' => 'error',
+                'message' => 'Service already assigned to this barber'
+            ];
+        }
+        
+        $query = "INSERT INTO " . $this->table_name . " (barber_id, service_id) 
+                  VALUES (:barber_id, :service_id)";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":barber_id", $barber_id);
+        $stmt->bindParam(":service_id", $service_id);
+        
+        if($stmt->execute()) {
+            return [
+                'status' => 'success',
+                'message' => 'Service assigned to barber successfully'
+            ];
+        }
+        
+        return [
+            'status' => 'error',
+            'message' => 'Unable to assign service to barber'
+        ];
+    }
+
+    // GET BARBER'S SERVICES
+    public function get_barber_services($barber_id) {
+        $query = "SELECT bs.*, s.name, s.description, s.price, s.duration_minutes 
+                  FROM " . $this->table_name . " bs
+                  INNER JOIN services s ON bs.service_id = s.id
+                  WHERE bs.barber_id = :barber_id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":barber_id", $barber_id);
+        $stmt->execute();
+        
+        $services = [];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $services[] = $row;
+        }
+        
+        return [
+            'status' => 'success',
+            'data' => $services
+        ];
+    }
+
+    // GET SERVICE'S BARBERS
+    public function get_service_barbers($service_id) {
+        $query = "SELECT bs.*, b.name, b.description, b.phone, b.email, b.picture 
+                  FROM " . $this->table_name . " bs
+                  INNER JOIN barber b ON bs.barber_id = b.id
+                  WHERE bs.service_id = :service_id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":service_id", $service_id);
+        $stmt->execute();
+        
+        $barbers = [];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $barbers[] = $row;
+        }
+        
+        return [
+            'status' => 'success',
+            'data' => $barbers
+        ];
+    }
+
+    // REMOVE SERVICE FROM BARBER
+    public function remove_service($barber_id, $service_id) {
+        $query = "DELETE FROM " . $this->table_name . " 
+                  WHERE barber_id = :barber_id AND service_id = :service_id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":barber_id", $barber_id);
+        $stmt->bindParam(":service_id", $service_id);
+        
+        if($stmt->execute() && $stmt->rowCount() > 0) {
+            return [
+                'status' => 'success',
+                'message' => 'Service removed from barber successfully'
+            ];
+        }
+        
+        return [
+            'status' => 'error',
+            'message' => 'Unable to remove service from barber or relation not found'
+        ];
+    }
+
+    // GET ALL RELATIONS
+    public function get_all_relations() {
+        $query = "SELECT bs.barber_id, bs.service_id, 
+                         b.name as barber_name, s.name as service_name,
+                         s.price, s.duration_minutes
+                  FROM " . $this->table_name . " bs
+                  INNER JOIN barber b ON bs.barber_id = b.id
+                  INNER JOIN services s ON bs.service_id = s.id
+                  ORDER BY b.name, s.name";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        
+        $relations = [];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $relations[] = $row;
+        }
+        
+        return [
+            'status' => 'success',
+            'data' => $relations
+        ];
+    }
+}
+
+// Handle API requests
+$database = new Database();
+$db = $database->getConnection();
+$barber_service = new BarberService($db);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-switch ($method) {
+switch($method) {
     case 'GET':
-        if (isset($_GET['id'])) {
-            getBarberServiceById($pdo, $_GET['id']);
+        if(isset($_GET['barber_id'])) {
+            $result = $barber_service->get_barber_services($_GET['barber_id']);
+        } elseif(isset($_GET['service_id'])) {
+            $result = $barber_service->get_service_barbers($_GET['service_id']);
         } else {
-            getAllBarberServices($pdo);
+            $result = $barber_service->get_all_relations();
         }
         break;
-
+        
     case 'POST':
-        createBarberService($pdo);
+        $data = json_decode(file_get_contents("php://input"), true);
+        if(isset($data['barber_id']) && isset($data['service_id'])) {
+            $result = $barber_service->assign_service($data['barber_id'], $data['service_id']);
+        } else {
+            $result = ['status' => 'error', 'message' => 'Barber ID and Service ID are required'];
+        }
         break;
-
-    case 'PUT':
-        updateBarberService($pdo);
-        break;
-
+        
     case 'DELETE':
-        deleteBarberService($pdo);
+        if(isset($_GET['barber_id']) && isset($_GET['service_id'])) {
+            $result = $barber_service->remove_service($_GET['barber_id'], $_GET['service_id']);
+        } else {
+            $result = ['status' => 'error', 'message' => 'Barber ID and Service ID are required'];
+        }
         break;
-
+        
     default:
-        http_response_code(405); // Method Not Allowed
-        echo json_encode(["error" => "Metode HTTP tidak didukung"]);
+        $result = ['status' => 'error', 'message' => 'Method not allowed'];
         break;
 }
 
-// Ambil semua relasi barber-service
-function getAllBarberServices($pdo) {
-    $sql = "SELECT bs.*, b.name AS barber_name, s.name AS service_name 
-            FROM barber_service bs
-            JOIN barber b ON bs.barber_id = b.id
-            JOIN services s ON bs.service_id = s.id";
-    $stmt = $pdo->query($sql);
-    $relations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode(["barber_services" => $relations]);
-}
-
-// Ambil relasi berdasarkan ID
-function getBarberServiceById($pdo, $id) {
-    $sql = "SELECT bs.*, b.name AS barber_name, s.name AS service_name 
-            FROM barber_service bs
-            JOIN barber b ON bs.barber_id = b.id
-            JOIN services s ON bs.service_id = s.id
-            WHERE bs.id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $id]);
-    $relation = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($relation) {
-        echo json_encode(["barber_service" => $relation]);
-    } else {
-        http_response_code(404);
-        echo json_encode(["error" => "Relasi barber-service tidak ditemukan"]);
-    }
-}
-
-// Tambah relasi baru
-function createBarberService($pdo) {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    if (!isset($data['barber_id']) || !isset($data['service_id'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "Barber ID dan Service ID harus disertakan"]);
-        return;
-    }
-
-    $sql = "INSERT INTO barber_service (barber_id, service_id) VALUES (:barber_id, :service_id)";
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([
-        'barber_id' => $data['barber_id'],
-        'service_id' => $data['service_id']
-    ]);
-
-    if ($result) {
-        http_response_code(201);
-        echo json_encode(["message" => "Relasi barber-service berhasil ditambahkan"]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => "Gagal menambahkan relasi"]);
-    }
-}
-
-// Update relasi
-function updateBarberService($pdo) {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    if (!isset($data['id'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "ID relasi harus disertakan"]);
-        return;
-    }
-
-    $sql = "UPDATE barber_service SET barber_id = :barber_id, service_id = :service_id WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute([
-        'id' => $data['id'],
-        'barber_id' => $data['barber_id'],
-        'service_id' => $data['service_id']
-    ]);
-
-    if ($result) {
-        http_response_code(200);
-        echo json_encode(["message" => "Relasi barber-service berhasil diperbarui"]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => "Gagal memperbarui relasi"]);
-    }
-}
-
-// Hapus relasi
-function deleteBarberService($pdo) {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    if (!isset($data['id'])) {
-        http_response_code(400);
-        echo json_encode(["error" => "ID relasi harus disertakan"]);
-        return;
-    }
-
-    $sql = "DELETE FROM barber_service WHERE id = :id";
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute(['id' => $data['id']]);
-
-    if ($result) {
-        http_response_code(200);
-        echo json_encode(["message" => "Relasi barber-service berhasil dihapus"]);
-    } else {
-        http_response_code(500);
-        echo json_encode(["error" => "Gagal menghapus relasi"]);
-    }
-}
+echo json_encode($result);
 ?>

@@ -1,5 +1,5 @@
 <?php
-// api/services.php
+// api/products.php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
@@ -7,9 +7,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../config/database.php';
 
-class Services {
+class Products {
     private $conn;
-    private $table_name = "services";
+    private $table_name = "products";
 
     public function __construct($db) {
         $this->conn = $db;
@@ -17,27 +17,27 @@ class Services {
 
     // CREATE
     public function create($data) {
-        $query = "INSERT INTO " . $this->table_name . " (name, description, price, duration_minutes) 
-                  VALUES (:name, :description, :price, :duration_minutes)";
+        $query = "INSERT INTO " . $this->table_name . " (name, description, price, stock) 
+                  VALUES (:name, :description, :price, :stock)";
         
         $stmt = $this->conn->prepare($query);
         
         $stmt->bindParam(":name", $data['name']);
         $stmt->bindParam(":description", $data['description']);
         $stmt->bindParam(":price", $data['price']);
-        $stmt->bindParam(":duration_minutes", $data['duration_minutes']);
+        $stmt->bindParam(":stock", $data['stock']);
         
         if($stmt->execute()) {
             return [
                 'status' => 'success',
-                'message' => 'Service created successfully',
+                'message' => 'Product created successfully',
                 'id' => $this->conn->lastInsertId()
             ];
         }
         
         return [
             'status' => 'error',
-            'message' => 'Unable to create service'
+            'message' => 'Unable to create product'
         ];
     }
 
@@ -47,14 +47,14 @@ class Services {
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         
-        $services = [];
+        $products = [];
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $services[] = $row;
+            $products[] = $row;
         }
         
         return [
             'status' => 'success',
-            'data' => $services
+            'data' => $products
         ];
     }
 
@@ -75,15 +75,14 @@ class Services {
         
         return [
             'status' => 'error',
-            'message' => 'Service not found'
+            'message' => 'Product not found'
         ];
     }
 
     // UPDATE
     public function update($id, $data) {
         $query = "UPDATE " . $this->table_name . " 
-                  SET name = :name, description = :description, price = :price, 
-                      duration_minutes = :duration_minutes 
+                  SET name = :name, description = :description, price = :price, stock = :stock 
                   WHERE id = :id";
         
         $stmt = $this->conn->prepare($query);
@@ -92,18 +91,18 @@ class Services {
         $stmt->bindParam(":name", $data['name']);
         $stmt->bindParam(":description", $data['description']);
         $stmt->bindParam(":price", $data['price']);
-        $stmt->bindParam(":duration_minutes", $data['duration_minutes']);
+        $stmt->bindParam(":stock", $data['stock']);
         
         if($stmt->execute()) {
             return [
                 'status' => 'success',
-                'message' => 'Service updated successfully'
+                'message' => 'Product updated successfully'
             ];
         }
         
         return [
             'status' => 'error',
-            'message' => 'Unable to update service'
+            'message' => 'Unable to update product'
         ];
     }
 
@@ -116,13 +115,56 @@ class Services {
         if($stmt->execute()) {
             return [
                 'status' => 'success',
-                'message' => 'Service deleted successfully'
+                'message' => 'Product deleted successfully'
             ];
         }
         
         return [
             'status' => 'error',
-            'message' => 'Unable to delete service'
+            'message' => 'Unable to delete product'
+        ];
+    }
+
+    // SEARCH
+    public function search($keyword) {
+        $query = "SELECT * FROM " . $this->table_name . " 
+                  WHERE name LIKE :keyword OR description LIKE :keyword 
+                  ORDER BY created_at DESC";
+        
+        $stmt = $this->conn->prepare($query);
+        $keyword = "%{$keyword}%";
+        $stmt->bindParam(":keyword", $keyword);
+        $stmt->execute();
+        
+        $products = [];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $products[] = $row;
+        }
+        
+        return [
+            'status' => 'success',
+            'data' => $products
+        ];
+    }
+
+    // UPDATE STOCK
+    public function update_stock($id, $stock) {
+        $query = "UPDATE " . $this->table_name . " SET stock = :stock WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":stock", $stock);
+        
+        if($stmt->execute()) {
+            return [
+                'status' => 'success',
+                'message' => 'Stock updated successfully'
+            ];
+        }
+        
+        return [
+            'status' => 'error',
+            'message' => 'Unable to update stock'
         ];
     }
 }
@@ -130,29 +172,35 @@ class Services {
 // Handle API requests
 $database = new Database();
 $db = $database->getConnection();
-$services = new Services($db);
+$products = new Products($db);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
     case 'GET':
-        if(isset($_GET['id'])) {
-            $result = $services->read_single($_GET['id']);
+        if(isset($_GET['search'])) {
+            $result = $products->search($_GET['search']);
+        } elseif(isset($_GET['id'])) {
+            $result = $products->read_single($_GET['id']);
         } else {
-            $result = $services->read();
+            $result = $products->read();
         }
         break;
         
     case 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
-        $result = $services->create($data);
+        $result = $products->create($data);
         break;
         
     case 'PUT':
         $data = json_decode(file_get_contents("php://input"), true);
         $id = $_GET['id'] ?? null;
         if($id) {
-            $result = $services->update($id, $data);
+            if(isset($data['stock_only'])) {
+                $result = $products->update_stock($id, $data['stock']);
+            } else {
+                $result = $products->update($id, $data);
+            }
         } else {
             $result = ['status' => 'error', 'message' => 'ID is required'];
         }
@@ -161,7 +209,7 @@ switch($method) {
     case 'DELETE':
         $id = $_GET['id'] ?? null;
         if($id) {
-            $result = $services->delete($id);
+            $result = $products->delete($id);
         } else {
             $result = ['status' => 'error', 'message' => 'ID is required'];
         }

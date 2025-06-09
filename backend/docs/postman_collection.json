@@ -1,0 +1,460 @@
+{
+  "info": {
+    "name": "Barbershop API",
+    "description": "Complete CRUD API for Barbershop Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/barbershop-api/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Barber Management",
+      "item": [
+        {
+          "name": "Get All Barbers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber.php",
+              "host": ["{{base_url}}"],
+              "path": ["barber.php"]
+            }
+          }
+        },
+        {
+          "name": "Get Barber by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["barber.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Barber",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mike Johnson\",\n  \"description\": \"Expert in modern and classic cuts\",\n  \"phone\": \"+6281234567892\",\n  \"email\": \"mike@barbershop.com\",\n  \"picture\": \"mike.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/barber.php",
+              "host": ["{{base_url}}"],
+              "path": ["barber.php"]
+            }
+          }
+        },
+        {
+          "name": "Update Barber",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mike Johnson Updated\",\n  \"description\": \"Expert in modern and classic cuts - Updated\",\n  \"phone\": \"+6281234567892\",\n  \"email\": \"mike.updated@barbershop.com\",\n  \"picture\": \"mike_updated.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/barber.php?id=3",
+              "host": ["{{base_url}}"],
+              "path": ["barber.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Barber",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber.php?id=3",
+              "host": ["{{base_url}}"],
+              "path": ["barber.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services Management",
+      "item": [
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/services.php",
+              "host": ["{{base_url}}"],
+              "path": ["services.php"]
+            }
+          }
+        },
+        {
+          "name": "Get Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/services.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["services.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Hair Styling\",\n  \"description\": \"Professional hair styling service\",\n  \"price\": 40000.00,\n  \"duration_minutes\": 45\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/services.php",
+              "host": ["{{base_url}}"],
+              "path": ["services.php"]
+            }
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium Hair Styling\",\n  \"description\": \"Premium professional hair styling service\",\n  \"price\": 60000.00,\n  \"duration_minutes\": 60\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/services.php?id=4",
+              "host": ["{{base_url}}"],
+              "path": ["services.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/services.php?id=4",
+              "host": ["{{base_url}}"],
+              "path": ["services.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products Management",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"]
+            }
+          }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?search=pomade",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "pomade"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Hair Wax\",\n  \"description\": \"Strong hold hair wax\",\n  \"price\": 85000.00,\n  \"stock\": 40\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products.php",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium Hair Wax\",\n  \"description\": \"Premium strong hold hair wax\",\n  \"price\": 95000.00,\n  \"stock\": 35\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products.php?id=4",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Stock Only",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock\": 20,\n  \"stock_only\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/products.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/products.php?id=4",
+              "host": ["{{base_url}}"],
+              "path": ["products.php"],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Barber-Service Relations",
+      "item": [
+        {
+          "name": "Get All Relations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber_service.php",
+              "host": ["{{base_url}}"],
+              "path": ["barber_service.php"]
+            }
+          }
+        },
+        {
+          "name": "Get Barber's Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber_service.php?barber_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["barber_service.php"],
+              "query": [
+                {
+                  "key": "barber_id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Service's Barbers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber_service.php?service_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["barber_service.php"],
+              "query": [
+                {
+                  "key": "service_id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Assign Service to Barber",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"barber_id\": 2,\n  \"service_id\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/barber_service.php",
+              "host": ["{{base_url}}"],
+              "path": ["barber_service.php"]
+            }
+          }
+        },
+        {
+          "name": "Remove Service from Barber",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/barber_service.php?barber_id=2&service_id=2",
+              "host": ["{{base_url}}"],
+              "path": ["barber_service.php"],
+              "query": [
+                {
+                  "key": "barber_id",
+                  "value": "2"
+                },
+                {
+                  "key": "service_id",
+                  "value": "2"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
