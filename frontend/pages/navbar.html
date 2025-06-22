@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../frontend/assets/css/navbar.css" />
     <title>Navbar Barbershop</title>
-    <link rel="stylesheet" href="../assets/css/nav.css" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -29,6 +30,39 @@
         <a href="#contact">Contact</a>
       </nav>
 
-    <script src="script.js"></script>
+      <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <script>
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navCenter = document.querySelector(".navbar-center");
+
+      hamburger.addEventListener("click", () => {
+        console.log("Hamburger clicked"); // Debug log
+        hamburger.classList.toggle("active");
+        navCenter.classList.toggle("active");
+      });
+
+      // Close menu when clicking on a link
+      const navLinks = document.querySelectorAll(".navbar-center a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          navCenter.classList.remove("active");
+        });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!hamburger.contains(e.target) && !navCenter.contains(e.target)) {
+          hamburger.classList.remove("active");
+          navCenter.classList.remove("active");
+        }
+      });
+    </script>
   </body>
 </html>

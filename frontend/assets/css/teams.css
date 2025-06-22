@@ -1,6 +1,8 @@
 .teams-section {
-  padding: 60px 0;
-  background-color: #000000;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
 }
 
 .teams-container {
@@ -23,8 +25,11 @@
 }
 
 .card-container {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -55,18 +60,6 @@
 .card-content h3 {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #000;
   margin: 0;
-}
-
-@media (max-width: 767px) {
-  /* Atur layout untuk mobile */
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Atur layout untuk tablet */
-}
-
-@media (min-width: 1024px) {
-  /* Default layout untuk desktop */
 }
