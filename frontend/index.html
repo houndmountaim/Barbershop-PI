@@ -75,18 +75,15 @@
         console.log("NavCenter element:", navCenter);
 
         if (hamburger && navCenter) {
-          // Remove any existing event listeners to prevent duplicates
           const newHamburger = hamburger.cloneNode(true);
           hamburger.parentNode.replaceChild(newHamburger, hamburger);
 
-          // Add click event to hamburger
           newHamburger.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             console.log("Hamburger clicked!");
 
-            // Toggle active class
             newHamburger.classList.toggle("active");
             navCenter.classList.toggle("active");
 
@@ -100,7 +97,6 @@
             );
           });
 
-          // Close menu when clicking on navigation links
           const navLinks = document.querySelectorAll(".navbar-center a");
           navLinks.forEach((link) => {
             link.addEventListener("click", function () {
@@ -108,7 +104,6 @@
               newHamburger.classList.remove("active");
               navCenter.classList.remove("active");
 
-              // Handle smooth scrolling for anchor links
               const href = this.getAttribute("href");
               if (href && href.startsWith("#")) {
                 const targetId = href.substring(1);
@@ -125,7 +120,6 @@
             });
           });
 
-          // Close menu when clicking outside
           document.addEventListener("click", function (e) {
             if (
               !newHamburger.contains(e.target) &&
@@ -136,7 +130,6 @@
             }
           });
 
-          // Close menu on escape key
           document.addEventListener("keydown", function (e) {
             if (e.key === "Escape") {
               newHamburger.classList.remove("active");
@@ -153,7 +146,6 @@
         }
       }
 
-      // Alternative method using MutationObserver
       const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
           if (mutation.type === "childList") {
@@ -185,6 +177,62 @@
             initHamburgerMenu();
           }
         }, 1000);
+      });
+
+      // -----------------------
+      // EmailJS Functionality
+      // -----------------------
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load EmailJS script
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+        script.onload = function () {
+          emailjs.init("WksM0yjcm2Uq4eME3"); // Public Key
+
+          // Wait for contact section to be loaded
+          const observer = new MutationObserver(function () {
+            const form = document.querySelector("#section-contact form");
+            if (form) {
+              observer.disconnect();
+
+              form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const data = {
+                  first_name: form["first-name"].value,
+                  last_name: form["last-name"].value,
+                  phone: form["phone"].value,
+                  email: form["email"].value,
+                  service: form["service"].value,
+                  message: form["message"].value,
+                };
+
+                emailjs.send("service_uo96cd7", "template_i593pr5", data).then(
+                  function (response) {
+                    console.log(
+                      "EmailJS SUCCESS:",
+                      response.status,
+                      response.text
+                    );
+                    alert("Message sent successfully!");
+                    form.reset();
+                  },
+                  function (error) {
+                    console.error("EmailJS FAILED:", error);
+                    alert("Failed to send message: " + error.text);
+                  }
+                );
+              });
+            }
+          });
+
+          observer.observe(document.getElementById("section-contact"), {
+            childList: true,
+            subtree: true,
+          });
+        };
+        document.body.appendChild(script);
       });
     </script>
   </body>
