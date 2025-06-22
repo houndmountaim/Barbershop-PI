@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - K-One</title>
+    <link rel="stylesheet" href="../frontend/assets/css/teams.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <section id="teams" class="teams-section">
+      <div class="container teams-container">
+        <!-- Konten Teams di sini -->
+        <h2>Our Teams</h2>
+        <p>Meet the professionals behind Nine'O Barbershop.</p>
+
+        <!-- Contoh Card Teams -->
+        <div class="card-container">
+          <!-- Card 1 -->
+          <div class="card">
+            <img
+              src="https://res.cloudinary.com/du33tbey1/image/upload/v1747746109/whatsapp-image-2024-11-23-at-18-38-04_e5pmnk.webp "
+              alt="Team Member 1"
+              class="profile-picture"
+            />
+            <div class="card-content">
+              <h3>Panji</h3>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card">
+            <img
+              src="https://res.cloudinary.com/du33tbey1/image/upload/v1747746109/whatsapp-image-2024-11-23-at-18-38-04_e5pmnk.webp "
+              alt="Team Member 2"
+              class="profile-picture"
+            />
+            <div class="card-content">
+              <h3>Rizal</h3>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card">
+            <img
+              src="https://res.cloudinary.com/du33tbey1/image/upload/v1747746109/whatsapp-image-2024-11-23-at-18-38-04_e5pmnk.webp "
+              alt="Team Member 3"
+              class="profile-picture"
+            />
+            <div class="card-content">
+              <h3>Dika</h3>
+            </div>
+          </div>
+        </div>
+        <!-- End of Card Container -->
+      </div>
+    </section>
+
+    <script>
+      fetch("/frontend/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

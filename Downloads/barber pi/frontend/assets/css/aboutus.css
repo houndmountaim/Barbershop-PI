@@ -1,0 +1,74 @@
+/* About Us Section */
+.aboutus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px;
+  background-color: #fff;
+  color: #000;
+}
+
+.aboutus-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.aboutus-left .main-img {
+  max-width: 100%;
+  width: 400px;
+  border-radius: 10px;
+}
+
+.aboutus-right {
+  flex: 1;
+  padding-left: 40px;
+}
+
+.aboutus-subtitle {
+  color: #b68934;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.aboutus-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.aboutus-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.aboutus-quote {
+  font-style: italic;
+  border-left: 3px solid #b68934;
+  padding-left: 15px;
+  margin-bottom: 30px;
+}
+
+.btn-aboutus {
+  background-color: #b68934;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  /* Atur layout untuk mobile */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Atur layout untuk tablet */
+}
+
+@media (min-width: 1024px) {
+  /* Default layout untuk desktop */
+}
