@@ -41,7 +41,7 @@
 }
 
 .service-item:hover img {
-  filter: brightness(0) invert(1); /* ubah ikon jadi putih saat hover */
+  filter: brightness(0) invert(1);
 }
 
 .service-item.active {
@@ -125,6 +125,23 @@
   background-color: #a1762d;
 }
 
+.footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
 /* RESPONSIVE BREAKPOINTS */
 
 @media (max-width: 767px) {
@@ -168,6 +185,12 @@
   .service-text,
   .service-img {
     max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer p {
+    font-size: 14px;
   }
 }
 

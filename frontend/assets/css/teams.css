@@ -63,3 +63,26 @@
   color: #000;
   margin: 0;
 }
+
+@media (max-width: 900px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-picture {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
