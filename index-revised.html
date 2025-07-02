@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nine'O Barbershop</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Section -->
+    <div id="section-home"></div>
+    <div id="section-aboutus"></div>
+    <div id="section-teams"></div>
+    <div id="section-services"></div>
+    <div id="section-products"></div>
+    <div id="section-contact"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025 Nine'O Barbershop. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Script to Load External HTML Files -->
+    <script>
+      const sections = {
+        "section-home": "frontend/pages/home.html",
+        "section-aboutus": "frontend/pages/aboutus.html",
+        "section-teams": "frontend/pages/teams.html",
+        "section-services": "frontend/pages/services.html",
+        "section-products": "frontend/pages/products.html",
+        "section-contact": "frontend/pages/contact.html",
+      };
+
+      // Load all sections
+      Object.entries(sections).forEach(([id, url]) => {
+        fetch(url)
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById(id).innerHTML = data;
+          })
+          .catch((err) => console.error(`Gagal memuat ${url}: `, err));
+      });
+
+      // Load Navbar and initialize hamburger menu
+      fetch("frontend/pages/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+
+          setTimeout(initHamburgerMenu, 100);
+        })
+        .catch((err) => console.error("Gagal memuat navbar.html: ", err));
+
+      function initHamburgerMenu() {
+        const hamburger = document.querySelector(".hamburger-menu");
+        const navCenter = document.querySelector(".navbar-center");
+
+        if (hamburger && navCenter) {
+          const newHamburger = hamburger.cloneNode(true);
+          hamburger.parentNode.replaceChild(newHamburger, hamburger);
+
+          newHamburger.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            newHamburger.classList.toggle("active");
+            navCenter.classList.toggle("active");
+          });
+
+          const navLinks = document.querySelectorAll(".navbar-center a");
+          navLinks.forEach((link) => {
+            link.addEventListener("click", function () {
+              newHamburger.classList.remove("active");
+              navCenter.classList.remove("active");
+
+              const href = this.getAttribute("href");
+              if (href && href.startsWith("#")) {
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(
+                  `section-${targetId}`
+                );
+                if (targetSection) {
+                  targetSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              }
+            });
+          });
+
+          document.addEventListener("click", function (e) {
+            if (
+              !newHamburger.contains(e.target) &&
+              !navCenter.contains(e.target)
+            ) {
+              newHamburger.classList.remove("active");
+              navCenter.classList.remove("active");
+            }
+          });
+
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+              newHamburger.classList.remove("active");
+              navCenter.classList.remove("active");
+            }
+          });
+        } else {
+          setTimeout(initHamburgerMenu, 500);
+        }
+      }
+
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === "childList") {
+            const hamburger = document.querySelector(".hamburger-menu");
+            if (hamburger && !hamburger.hasAttribute("data-initialized")) {
+              hamburger.setAttribute("data-initialized", "true");
+              initHamburgerMenu();
+              observer.disconnect();
+            }
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          if (
+            document.querySelector(".hamburger-menu") &&
+            !document
+              .querySelector(".hamburger-menu")
+              .hasAttribute("data-initialized")
+          ) {
+            initHamburgerMenu();
+          }
+        }, 1000);
+      });
+
+      // EmailJS
+      document.addEventListener("DOMContentLoaded", function () {
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+        script.onload = function () {
+          emailjs.init("WksM0yjcm2Uq4eME3");
+
+          const observer = new MutationObserver(function () {
+            const form = document.querySelector("#section-contact form");
+            if (form) {
+              observer.disconnect();
+
+              form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const data = {
+                  first_name: form["first-name"].value,
+                  last_name: form["last-name"].value,
+                  phone: form["phone"].value,
+                  email: form["email"].value,
+                  service: form["service"].value,
+                  message: form["message"].value,
+                };
+
+                emailjs.send("service_uo96cd7", "template_i593pr5", data).then(
+                  function (response) {
+                    alert("Message sent successfully!");
+                    form.reset();
+                  },
+                  function (error) {
+                    alert("Failed to send message: " + error.text);
+                  }
+                );
+              });
+            }
+          });
+
+          observer.observe(document.getElementById("section-contact"), {
+            childList: true,
+            subtree: true,
+          });
+        };
+        document.body.appendChild(script);
+      });
+    </script>
+  </body>
+</html>

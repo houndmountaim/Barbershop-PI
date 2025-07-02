@@ -53,12 +53,28 @@ body {
   right: 75px;
 }
 
-.hamburger-menu span {
+.hamburger-menu .bar {
   width: 25px;
   height: 3px;
   background-color: #fff;
   margin: 3px 0;
   transition: 0.3s;
+}
+
+.hamburger-menu .close-icon {
+  font-size: 28px;
+  color: #fff;
+  display: none;
+  transition: 0.3s;
+}
+
+/* Saat active, sembunyikan garis, tampilkan ikon X */
+.hamburger-menu.active .bar {
+  display: none;
+}
+
+.hamburger-menu.active .close-icon {
+  display: block;
 }
 
 .hamburger-menu.active span:nth-child(1) {
