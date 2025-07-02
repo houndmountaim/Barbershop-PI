@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Barber Home</title>
-    <link rel="stylesheet" href="../frontend/assets/css/home.css" />
+    <link rel="stylesheet" href="../assets/css/home.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap"
       rel="stylesheet"
@@ -19,12 +19,12 @@
         <h1 class="title">Best Haircut Salon<br />in the City</h1>
       </div>
       <div class="hero-image">
-        <img src="frontend/assets/images/barber.png" alt="Barber Hero" />
+        <img src="assets/images/barber.png" alt="Barber Hero" />
       </div>
     </section>
 
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/navbar.html")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;

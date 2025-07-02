@@ -12,7 +12,7 @@
     />
 
     <!-- CSS File -->
-    <link rel="stylesheet" href="../frontend/assets/css/contact.css" />
+    <link rel="stylesheet" href="../assets/css/contact.css" />
   </head>
   <body>
     <!-- Navbar Placeholder -->
@@ -96,7 +96,7 @@
 
     <!-- Fetch Navbar -->
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/navbar.html")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;

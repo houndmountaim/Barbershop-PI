@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us - Nine'O</title>
-    <link rel="stylesheet" href="../frontend/assets/css/aboutus.css" />
+    <link rel="stylesheet" href="../assets/css/aboutus.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -39,7 +39,7 @@
     </section>
 
     <script>
-      fetch("/frontend/navbar.html")
+      fetch("/navbar.html")
         .then((res) => res.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;
