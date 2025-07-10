@@ -45,7 +45,7 @@
 }
 
 .service-item.active {
-  background-color: f#b68934;
+  background-color: #b68934;
   color: #fff;
 }
 
@@ -89,12 +89,15 @@
 
 .service-text h3 {
   font-size: 1.8rem;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .service-text p {
   line-height: 1.6;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .service-text ul {
@@ -108,6 +111,27 @@
   padding-left: 24px;
   background: url("assets/icons/check.svg") no-repeat left center;
   background-size: 16px;
+}
+
+.services::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/ruangan.png"); /* ganti dengan path gambar kamu */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2; /* transparansi gambar */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Pastikan konten di atas background */
+.services {
+  position: relative;
+  z-index: 1;
 }
 
 .btn-book {

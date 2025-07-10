@@ -61,6 +61,81 @@ body {
   transition: 0.3s;
 }
 
+.hero {
+  background-image: url("/assets/images/barbershop1.jpeg"); /* Sesuaikan path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
+  padding: 100px; /* default desktop */
+  flex-wrap: wrap;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Transparansi 60% */
+  z-index: 0;
+}
+
+/* Agar konten tetap terlihat di atas overlay */
+.hero-text,
+.hero-image {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsif untuk layar kecil (mobile) */
+@media (max-width: 767px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .hero-text .title {
+    font-size: 2rem;
+  }
+
+  .hero-text .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+/* Responsif untuk tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero {
+    padding: 80px 40px;
+  }
+
+  .hero-text .title {
+    font-size: 2.5rem;
+  }
+
+  .hero-text .subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Desktop default */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 100px;
+  }
+}
+
 .hamburger-menu.active span:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -186,14 +261,6 @@ body {
   font-weight: 600;
   line-height: 1.2;
   color: #fff;
-}
-
-.btn-read-more {
-  margin-top: 20px;
-  background-color: #b68934;
-  color: white;
-  padding: 12px 24px;
-  text-decoration: none;
 }
 
 .hero-image img {
