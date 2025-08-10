@@ -43,6 +43,7 @@ body {
   justify-content: space-between;
   margin-top: 10px;
 }
+/* Bagian yang perlu dimodifikasi dari CSS Anda */
 
 .hamburger-menu {
   display: none;
@@ -51,6 +52,7 @@ body {
   position: absolute;
   top: 50px;
   right: 75px;
+  z-index: 1001; /* Pastikan hamburger di atas menu */
 }
 
 .hamburger-menu .bar {
@@ -58,35 +60,25 @@ body {
   height: 3px;
   background-color: #fff;
   margin: 3px 0;
-  transition: 0.3s;
+  transition: 0.3s ease;
+  transform-origin: center;
 }
 
 .hamburger-menu .close-icon {
-  font-size: 28px;
-  color: #fff;
-  display: none;
-  transition: 0.3s;
+  display: none; /* Sembunyikan karena kita akan menggunakan animasi bar */
 }
 
-/* Saat active, sembunyikan garis, tampilkan ikon X */
-.hamburger-menu.active .bar {
-  display: none;
+/* Animasi untuk mengubah hamburger menjadi X */
+.hamburger-menu.active .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-.hamburger-menu.active .close-icon {
-  display: block;
-}
-
-.hamburger-menu.active span:nth-child(1) {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger-menu.active span:nth-child(2) {
+.hamburger-menu.active .bar:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger-menu.active span:nth-child(3) {
-  transform: rotate(45deg) translate(-5px, -6px);
+.hamburger-menu.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
 @media (max-width: 767px) {
@@ -125,6 +117,11 @@ body {
     margin: 20px 0;
     font-size: 1.2rem;
     text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-center a:hover {
+    color: #ccc;
   }
 
   .navbar-left img {
